@@ -12,9 +12,9 @@ host = Host(device_id=0, synchronous=False)
 
 driver.connect(host)
 
-test = host.addUnit(Unit(host, "unit/test.ptx"));
+test = host.addUnit(Unit(host, "unit/waveform.ptx"));
 
-driver.createBuffers((0,), (0,))
+driver.createBuffers((0,1), (0,1))
 
 driver.play();
 

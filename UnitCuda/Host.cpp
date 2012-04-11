@@ -240,6 +240,8 @@ PyObject* Host_onCreateBuffers(Host* self)
 	for(unsigned long i = 0; i < self->setup.io.count; i++)
 	{
 		HostBuffer* buffer = self->setup.io.buffer + i;
+		if(buffer->length < 	self->setup.chunk_length)
+			buffer->length = self->setup.chunk_length;
 		buffer->length = upper_power_of_two(buffer->length);
 		buffer->mask = buffer->length - 1;
 		buffer->bytes = buffer->length * HOST_BUFFER_FORMAT_BYTES(buffer->format);

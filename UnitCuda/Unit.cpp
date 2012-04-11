@@ -209,3 +209,4 @@ void Unit_launchProcess(Unit* self)
 
 	CU_END( (void)0 );
 }
+

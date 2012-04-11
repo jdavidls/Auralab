@@ -6,6 +6,8 @@
 UNIT("Prodisign", "test", "0.1beta", "");
 
 GLOBAL HostBuffer* out;
+GLOBAL HostBuffer* in;
+
 GLOBAL float freq;
 
 EXPORT void onLoad()
@@ -36,10 +38,9 @@ EXPORT void onDestroyBuffers()
 EXPORT void onPlay()
 {
 	DEBUG("onPlay\n");
+	
 	out = setup.host->io.buffer;
-	printf("  buffer ptr: %p\n", out->ptr);
-
-
+	DEBUG("  buffer ptr: %p\n", out->ptr);
 }
 
 #define PI 3.1415

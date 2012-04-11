@@ -89,6 +89,29 @@ struct HostIO
 	unsigned long outputs;					//
 	unsigned long inputs;					//
 	HostBuffer buffer[64];					//	(Host<->Device)
+
+	inline GLOBAL HostBuffer* getOut(unsigned long id)
+	{
+		return buffer + id;
+	}
+
+	inline GLOBAL HostBuffer* getIn(unsigned long id)
+	{
+		return buffer + outputs + id;
+	}
+
+	inline GLOBAL HostBuffer* getAux(unsigned long id)
+	{
+		return buffer + outputs + inputs + id;
+	}
+
+	inline GLOBAL HostBuffer* allocBuffer(unsigned long n = 1)
+	{
+		HostBuffer* b = buffer + count;
+		count += n;
+		return b;
+	}
+
 };
 
 
@@ -163,8 +186,6 @@ struct UnitVars
 /***************************************************************************************************
 *
 ***************************************************************************************************/
-
-
 
 struct UnitKernel
 {
@@ -259,7 +280,7 @@ struct UnitSetup
 	UnitInfo info;							//	(Host<-Unit)
 	UnitVars globals;						//	(Host<-Unit)
 	
-	UnitLauncher queue;					//	(Host<-Device)
+	UnitLauncher queue;						//	(Host<-Device)
 	UnitLauncher process;					//	(Host<-Device)
 
 	CUmodule module;						//	(Host->Unit)
